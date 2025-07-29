@@ -9,7 +9,5 @@ namespace NZWalks.API.Repositories
         Task<Walk> CreateWalkAsync(Walk walk);
         Task<Walk?> UpdateWalkAsync(Guid id, Walk walk);
         Task<Walk?> DeleteWalkAsync(Guid id);
-        Task<IEnumerable<Walk>> GetWalksByRegionIdAsync(Guid regionId);
-        Task<IEnumerable<Walk>> GetWalksByDifficultyIdAsync(Guid difficultyId);
     }
 }

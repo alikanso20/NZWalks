@@ -29,25 +29,21 @@ namespace NZWalks.API.Repositories
             return walk;
         }
 
-        public Task<Walk?> DeleteWalkAsync(Guid id)
+        public async Task<Walk?> DeleteWalkAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingWalk = await dbContext.Walks.Include("Difficulty").Include("Region").FirstOrDefaultAsync(x => x.Id == id);
+            if (existingWalk == null)
+                return null;
+
+            dbContext.Walks.Remove(existingWalk);
+            await dbContext.SaveChangesAsync();
+            return existingWalk;
         }
 
 
         public async Task<Walk?> GetWalkByIdAsync(Guid id)
         {
             return await dbContext.Walks.Include("Difficulty").Include("Region").FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public Task<IEnumerable<Walk>> GetWalksByDifficultyIdAsync(Guid difficultyId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Walk>> GetWalksByRegionIdAsync(Guid regionId)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Walk?> UpdateWalkAsync(Guid id, Walk walk)
