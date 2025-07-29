@@ -39,33 +39,47 @@ namespace NZWalks.API.Controllers
             {
                 return NotFound();
             }
-            
+
             return Ok(mapper.Map<RegionDto>(region));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateNewRegion([FromBody] AddRegionRequestDto input)
         {
-            var regionDomainModel = mapper.Map<Region>(input);
+            if (ModelState.IsValid)
+            {
+                var regionDomainModel = mapper.Map<Region>(input);
 
-            regionDomainModel = await regionRepository.AddRegionAsync(regionDomainModel);
+                regionDomainModel = await regionRepository.AddRegionAsync(regionDomainModel);
 
-            var regionsDto = mapper.Map<RegionDto>(regionDomainModel);
+                var regionsDto = mapper.Map<RegionDto>(regionDomainModel);
 
-            return CreatedAtAction(nameof(GetRegionById), new { id = regionDomainModel.Id }, regionsDto);
+                return CreatedAtAction(nameof(GetRegionById), new { id = regionDomainModel.Id }, regionsDto);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpPut]
         [Route("{Id:Guid}")]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid Id, [FromBody] UpdateRegionRequestDto input)
         {
-            var regionDomainModel = mapper.Map<Region>(input);
+            if (ModelState.IsValid)
+            {
+                var regionDomainModel = mapper.Map<Region>(input);
 
-            regionDomainModel = await regionRepository.UpdateRegionAsync(Id, regionDomainModel);
-            if (regionDomainModel == null)
-                return NotFound();
+                regionDomainModel = await regionRepository.UpdateRegionAsync(Id, regionDomainModel);
+                if (regionDomainModel == null)
+                    return NotFound();
 
-            return Ok(mapper.Map<RegionDto>(regionDomainModel));
+                return Ok(mapper.Map<RegionDto>(regionDomainModel));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         [HttpDelete]

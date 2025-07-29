@@ -34,6 +34,40 @@ namespace NZWalks.API.Data
                 new Region { Id = new Guid("8053d0ef-a054-4b87-bd16-bd76da7ba654"), Code = "MW", Name = "Manawatu-Whanganui", RegionImageUrl = "https://example.com/manawatu-whanganui.jpg" },
                 new Region { Id = new Guid("fed10ff2-47f5-4a6f-b3fb-ed14e3dc655c"), Code = "CA", Name = "Canterbury", RegionImageUrl = "https://example.com/canterbury.jpg" }
             );
+
+            // Seed data for Walks
+            modelBuilder.Entity<Walk>().HasData(
+                new Walk
+                {
+                    Id = new Guid("a1e1b2c3-d4e5-6789-0123-456789abcdef"),
+                    Name = "Tongariro Alpine Crossing",
+                    Description = "A challenging day hike across volcanic terrain.",
+                    LengthInKm = 19.4,
+                    WalkImageUrl = "https://example.com/tongariro.jpg",
+                    DifficultyId = new Guid("d905c976-6303-45e4-b7ae-a2333549b092"), // Hard
+                    RegionId = new Guid("1544305d-b597-49cb-829f-cf299f103b1b") // North Island
+                },
+                new Walk
+                {
+                    Id = new Guid("b2f2c3d4-e5f6-7890-1234-567890abcdef"),
+                    Name = "Milford Track",
+                    Description = "A multi-day walk through Fiordland National Park.",
+                    LengthInKm = 53.5,
+                    WalkImageUrl = "https://example.com/milford.jpg",
+                    DifficultyId = new Guid("3b6f32c4-764c-4c19-841e-b4e475ab4a6e"), // Medium
+                    RegionId = new Guid("26031ecb-2754-4431-852f-dce2729a45ec") // South Island
+                },
+                new Walk
+                {
+                    Id = new Guid("c3d4e5f6-7890-1234-5678-90abcdef1234"),
+                    Name = "Auckland Coast Walk",
+                    Description = "A scenic walk along Auckland's coastline.",
+                    LengthInKm = 10.2,
+                    WalkImageUrl = "https://example.com/auckland-coast.jpg",
+                    DifficultyId = new Guid("36e7f51c-f4cd-4869-9bb3-fa77b2c5f4f8"), // Easy
+                    RegionId = new Guid("495c11c8-1e70-4aa3-805f-2cd85c51050e") // Auckland
+                }
+            );
         }
     }
 }
