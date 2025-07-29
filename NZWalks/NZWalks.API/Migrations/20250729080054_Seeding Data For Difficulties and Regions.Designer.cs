@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NZWalks.API.Data;
 
@@ -11,9 +12,11 @@ using NZWalks.API.Data;
 namespace NZWalks.API.Migrations
 {
     [DbContext(typeof(NZWalksDbContext))]
-    partial class NZWalksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250729080054_Seeding Data For Difficulties and Regions")]
+    partial class SeedingDataForDifficultiesandRegions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,12 +47,12 @@ namespace NZWalks.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3b6f32c4-764c-4c19-841e-b4e475ab4a6e"),
+                            Id = new Guid("d905c976-6303-45e4-b7ae-a2333549b092"),
                             Name = "Medium"
                         },
                         new
                         {
-                            Id = new Guid("d905c976-6303-45e4-b7ae-a2333549b092"),
+                            Id = new Guid("3b6f32c4-764c-4c19-841e-b4e475ab4a6e"),
                             Name = "Hard"
                         });
                 });
@@ -78,7 +81,7 @@ namespace NZWalks.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1544305d-b597-49cb-829f-cf299f103b1b"),
+                            Id = new Guid("8006eb7f-ba5a-444d-888c-8436c1ce13d0"),
                             Code = "NI",
                             Name = "North Island",
                             RegionImageUrl = "https://example.com/north-island.jpg"
@@ -99,28 +102,28 @@ namespace NZWalks.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5b164fea-7e3b-43bd-9582-000d580d5184"),
+                            Id = new Guid("fed10ff2-47f5-4a6f-b3fb-ed14e3dc655c"),
                             Code = "WK",
                             Name = "Waikato",
                             RegionImageUrl = "https://example.com/waikato.jpg"
                         },
                         new
                         {
-                            Id = new Guid("8006eb7f-ba5a-444d-888c-8436c1ce13d0"),
+                            Id = new Guid("8053d0ef-a054-4b87-bd16-bd76da7ba654"),
                             Code = "BP",
                             Name = "Bay of Plenty",
                             RegionImageUrl = "https://example.com/bay-of-plenty.jpg"
                         },
                         new
                         {
-                            Id = new Guid("8053d0ef-a054-4b87-bd16-bd76da7ba654"),
+                            Id = new Guid("1544305d-b597-49cb-829f-cf299f103b1b"),
                             Code = "MW",
                             Name = "Manawatu-Whanganui",
                             RegionImageUrl = "https://example.com/manawatu-whanganui.jpg"
                         },
                         new
                         {
-                            Id = new Guid("fed10ff2-47f5-4a6f-b3fb-ed14e3dc655c"),
+                            Id = new Guid("5b164fea-7e3b-43bd-9582-000d580d5184"),
                             Code = "CA",
                             Name = "Canterbury",
                             RegionImageUrl = "https://example.com/canterbury.jpg"
