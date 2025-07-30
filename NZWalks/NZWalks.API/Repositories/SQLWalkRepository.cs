@@ -17,14 +17,14 @@ namespace NZWalks.API.Repositories
         }
 
         public async Task<List<Walk>> GetAllAsync(string? filterOn = null, string? filterQuery = null,
-            string? sortBy = null, bool isAscending = true)
+            string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 1000)
         {
             //return await dbContext.Walks.Include("Difficulty").Include("Region").ToListAsync();
             var walks = dbContext.Walks.Include("Difficulty").Include("Region").AsQueryable();
-            if(!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
             {
-                if(filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
-                    walks = walks.Where(x=> x.Name.Contains(filterQuery));
+                if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                    walks = walks.Where(x => x.Name.Contains(filterQuery));
             }
 
             if (!string.IsNullOrWhiteSpace(sortBy))
@@ -39,7 +39,9 @@ namespace NZWalks.API.Repositories
                 }
             }
 
-            return await walks.ToListAsync();
+            var skipResults = (pageNumber - 1) * pageSize;
+
+            return await walks.Skip(skipResults).Take(pageSize).ToListAsync();
         }
 
         public async Task<Walk> CreateWalkAsync(Walk walk)
@@ -70,7 +72,7 @@ namespace NZWalks.API.Repositories
         public async Task<Walk?> UpdateWalkAsync(Guid id, Walk walk)
         {
             var existingWalk = await dbContext.Walks.Include("Difficulty").Include("Region").FirstOrDefaultAsync(x => x.Id == id);
-            if(existingWalk == null)
+            if (existingWalk == null)
                 return null;
 
             existingWalk.Name = walk.Name;
