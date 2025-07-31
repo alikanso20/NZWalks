@@ -44,7 +44,7 @@ namespace NZWalks.API.Repositories
             return await walks.Skip(skipResults).Take(pageSize).ToListAsync();
         }
 
-        public async Task<Walk> CreateWalkAsync(Walk walk)
+        public async Task<Walk> CreateWalkAsync(Walk walk) 
         {
             await dbContext.Walks.AddAsync(walk);
             await dbContext.SaveChangesAsync();
