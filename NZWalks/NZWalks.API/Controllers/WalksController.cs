@@ -26,7 +26,7 @@ namespace NZWalks.API.Controllers
         {
             var walksDomainModel = await walkRepository.GetAllAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
             return Ok(mapper.Map<List<WalkDto>>(walksDomainModel));
-        }
+        } 
 
         [HttpPost]
         [ValidateModel]
